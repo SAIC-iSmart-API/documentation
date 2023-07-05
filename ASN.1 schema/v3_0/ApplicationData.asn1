@@ -3,6 +3,22 @@ ApplicationDataModule
 DEFINITIONS
 AUTOMATIC TAGS ::= 
 BEGIN
+OTA_ChrgCtrlReq ::= SEQUENCE
+{
+  chrgCtrlReq INTEGER(0..255),
+  tboxV2XReq INTEGER(0..255),
+  tboxEleccLckCtrlReq INTEGER(0..255)
+}
+OTA_ChrgCtrlStsResp ::= SEQUENCE
+{
+  chrgCtrlDspCmd INTEGER(0..255),
+  chrgCtrlResp INTEGER(0..255),
+  bmsDsChrgCtrlDspCmd INTEGER(0..255) OPTIONAL,
+  bmsDsChrgCtrlResp INTEGER(0..255) OPTIONAL,
+  ccuEleccLckCtrlDspCmd INTEGER(0..255) OPTIONAL,
+  ccuEleccLckCtrlResp INTEGER(0..255) OPTIONAL,
+  rvcReqSts OCTET STRING(SIZE(1))
+}
 OTA_ChrgMangDataResp ::= SEQUENCE
 {
   bmsReserCtrlDspCmd INTEGER(0..255),
