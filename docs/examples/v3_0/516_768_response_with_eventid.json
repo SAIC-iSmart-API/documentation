@@ -1,6 +1,6 @@
 {
   "applicationData":{
-    "@ASN1Type":"OTA_ChrgMangDataResp",
+    "@ASN1Type":"OTAChrgMangDataResp",
     "bmsAdpPubChrgSttnDspCmd":0,
     "bmsAltngChrgCrntDspCmd":0,
     "bmsChrgCtrlDspCmd":2,
