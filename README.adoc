@@ -3583,7 +3583,7 @@ ApplicationDataModule
 DEFINITIONS
 AUTOMATIC TAGS ::= 
 BEGIN
-OTA_ChrgMangDataResp ::= SEQUENCE
+OTAChrgMangDataResp ::= SEQUENCE
 {
   bmsReserCtrlDspCmd INTEGER(0..255),
   bmsReserStHourDspCmd INTEGER(0..255),
@@ -3659,7 +3659,70 @@ RvsChargingStatus ::= SEQUENCE
   extendedData3 IA5String(SIZE(0..1024)) OPTIONAL,
   extendedData4 IA5String(SIZE(0..1024)) OPTIONAL
 }
-
+OTAChrgCtrlReq ::= SEQUENCE
+{
+    chrgCtrlReq INTEGER(0..255),
+    tboxV2XReq INTEGER(0..255),
+    tboxEleccLckCtrlReq INTEGER(0..255)
+}
+OTAChrgCtrlStsResp ::= SEQUENCE
+{
+    chrgCtrlDspCmd INTEGER(0..255),
+    chrgCtrlResp INTEGER(0..255),
+    bmsDsChrgCtrlDspCmd INTEGER(0..255) OPTIONAL,
+    bmsDsChrgCtrlResp INTEGER(0..255) OPTIONAL,
+    ccuEleccLckCtrlDspCmd INTEGER(0..255) OPTIONAL,
+    ccuEleccLckCtrlResp INTEGER(0..255) OPTIONAL,
+    rvcReqSts OCTET STRING(SIZE(1)) OPTIONAL
+}
+OTAChrgRsvanReq ::= SEQUENCE
+{
+    rsvanStHour INTEGER(0..255),
+    rsvanStMintu INTEGER(0..255),
+    rsvanSpHour INTEGER(0..255),
+    rsvanSpMintu INTEGER(0..255),
+    tboxReserCtrlReq INTEGER(0..255),
+    tboxAdpPubChrgSttnReq INTEGER(0..255)
+}
+OTAChrgRsvanResp ::= SEQUENCE
+{
+    rvcReqSts OCTET STRING(SIZE(1)),
+    bmsReserCtrlDspCmd INTEGER(0..255),
+    bmsReserStHourDspCmd INTEGER(0..255),
+    bmsReserStMintueDspCmd INTEGER(0..255),
+    bmsReserSpHourDspCmd INTEGER(0..255),
+    bmsReserSpMintueDspCmd INTEGER(0..255),
+    bmsAdpPubChrgSttnDspCmd INTEGER(0..255),
+    bmsReserChrgCtrlResp INTEGER(0..255) OPTIONAL
+}
+OTAChrgSetngReq ::= SEQUENCE
+{
+    onBdChrgTrgtSOCReq INTEGER(0..255),
+    altngChrgCrntReq INTEGER(0..255),
+    tboxV2XSpSOCReq INTEGER(0..255)
+}
+OTAChrgSetngResp ::= SEQUENCE
+{
+    rvcReqSts OCTET STRING(SIZE(1)),
+    bmsOnBdChrgTrgtSOCDspCmd INTEGER(0..255),
+    bmsChrgTrgtSOCResp INTEGER(0..255),
+    bmsEstdElecRng INTEGER(0..65535),
+    bmsAltngChrgCrntDspCmd INTEGER(0..255),
+    bmsPackCrnt INTEGER(0..65535),
+    bmsAltngChrgCrntResp INTEGER(0..255),
+    imcuDschrgTrgtSOCDspCmd INTEGER(0..255) OPTIONAL,
+    imcuDschrgTrgtSOCResp INTEGER(0..255) OPTIONAL
+}
+OTAChrgHeatReq ::= SEQUENCE
+{
+    ptcHeatReq INTEGER(0..255)
+}
+OTAChrgHeatResp ::= SEQUENCE
+{
+    ptcHeatReqDspCmd INTEGER(0..255),
+    ptcHeatResp INTEGER(0..255),
+    rvcReqSts OCTET STRING(SIZE(1))
+}
 END
 ----
 
@@ -3847,7 +3910,7 @@ To get the charging status, send a messeage with eventId=0 to the API endpoint. 
 ----
 {
   "applicationData":{
-    "@ASN1Type":"OTA_ChrgMangDataResp",
+    "@ASN1Type":"OTAChrgMangDataResp",
     "bmsAdpPubChrgSttnDspCmd":0,
     "bmsAltngChrgCrntDspCmd":0,
     "bmsChrgCtrlDspCmd":2,
